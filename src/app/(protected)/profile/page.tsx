@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Building2 } from "lucide-react";
 
 // Phase 2 will build the full business profile form

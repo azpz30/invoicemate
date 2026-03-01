@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PlusCircle, FileText, ChevronRight } from "lucide-react";
+import { PlusCircle, FileText } from "lucide-react";
 
 // Stub empty state — Phase 2 will populate this from the API
 export default function DashboardPage() {

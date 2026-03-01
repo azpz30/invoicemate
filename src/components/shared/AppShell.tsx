@@ -22,6 +22,98 @@ const navItems = [
     { label: "Business Profile", href: "/profile", icon: Building2 },
 ];
 
+const SidebarContent = ({
+    pathname,
+    setMobileOpen,
+    handleLogout
+}: {
+    pathname: string;
+    setMobileOpen: (open: boolean) => void;
+    handleLogout: () => void;
+}) => (
+    <div
+        style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            padding: "16px 12px",
+        }}
+    >
+        {/* Logo */}
+        <Link
+            href="/dashboard"
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 12px",
+                marginBottom: "24px",
+                textDecoration: "none",
+            }}
+            onClick={() => setMobileOpen(false)}
+        >
+            <div
+                style={{
+                    width: "28px",
+                    height: "28px",
+                    background: "var(--color-accent)",
+                    borderRadius: "7px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                }}
+            >
+                <FileText size={14} color="#fff" />
+            </div>
+            <span
+                style={{
+                    fontWeight: 600,
+                    fontSize: "0.9375rem",
+                    color: "var(--color-text)",
+                    letterSpacing: "-0.01em",
+                }}
+            >
+                InvoiceMate
+            </span>
+        </Link>
+
+        {/* Nav items */}
+        <nav style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1 }}>
+            {navItems.map((item) => {
+                const active = pathname === item.href;
+                return (
+                    <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`nav-item ${active ? "nav-item-active" : ""}`}
+                        onClick={() => setMobileOpen(false)}
+                    >
+                        <item.icon size={16} />
+                        {item.label}
+                    </Link>
+                );
+            })}
+        </nav>
+
+        {/* Logout */}
+        <button
+            onClick={handleLogout}
+            className="nav-item"
+            style={{
+                background: "none",
+                border: "none",
+                width: "100%",
+                textAlign: "left",
+                cursor: "pointer",
+            }}
+        >
+            <LogOut size={16} />
+            Sign out
+        </button>
+    </div>
+);
+
 export default function AppShell({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const router = useRouter();
@@ -33,89 +125,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         router.push("/");
     };
 
-    const SidebarContent = () => (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
-                padding: "16px 12px",
-            }}
-        >
-            {/* Logo */}
-            <Link
-                href="/dashboard"
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "8px 12px",
-                    marginBottom: "24px",
-                    textDecoration: "none",
-                }}
-                onClick={() => setMobileOpen(false)}
-            >
-                <div
-                    style={{
-                        width: "28px",
-                        height: "28px",
-                        background: "var(--color-accent)",
-                        borderRadius: "7px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                    }}
-                >
-                    <FileText size={14} color="#fff" />
-                </div>
-                <span
-                    style={{
-                        fontWeight: 600,
-                        fontSize: "0.9375rem",
-                        color: "var(--color-text)",
-                        letterSpacing: "-0.01em",
-                    }}
-                >
-                    InvoiceMate
-                </span>
-            </Link>
-
-            {/* Nav items */}
-            <nav style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1 }}>
-                {navItems.map((item) => {
-                    const active = pathname === item.href;
-                    return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={`nav-item ${active ? "nav-item-active" : ""}`}
-                            onClick={() => setMobileOpen(false)}
-                        >
-                            <item.icon size={16} />
-                            {item.label}
-                        </Link>
-                    );
-                })}
-            </nav>
-
-            {/* Logout */}
-            <button
-                onClick={handleLogout}
-                className="nav-item"
-                style={{
-                    background: "none",
-                    border: "none",
-                    width: "100%",
-                    textAlign: "left",
-                    cursor: "pointer",
-                }}
-            >
-                <LogOut size={16} />
-                Sign out
-            </button>
-        </div>
-    );
 
     return (
         <div style={{ display: "flex", minHeight: "100vh", background: "var(--color-bg)" }}>
@@ -132,7 +141,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     height: "100vh",
                 }}
             >
-                <SidebarContent />
+                <SidebarContent pathname={pathname} setMobileOpen={setMobileOpen} handleLogout={handleLogout} />
             </aside>
 
             {/* Mobile overlay */}
@@ -165,7 +174,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     transition: "transform 0.25s ease",
                 }}
             >
-                <SidebarContent />
+                <SidebarContent pathname={pathname} setMobileOpen={setMobileOpen} handleLogout={handleLogout} />
             </aside>
 
             {/* Main content */}

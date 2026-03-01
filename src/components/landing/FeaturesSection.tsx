@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, FileText, PieChart, Shield, Zap, Smartphone, Flag } from "lucide-react";
+import { Zap, Smartphone, Flag } from "lucide-react";
 
 const features = [
     {
