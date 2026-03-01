@@ -8,6 +8,7 @@ import CTASection from "@/components/landing/CTASection";
 export default function HomePage() {
   return (
     <div
+      suppressHydrationWarning
       style={{
         minHeight: "100vh",
         display: "flex",
