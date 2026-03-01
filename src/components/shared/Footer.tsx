@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { FileText } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -29,27 +29,14 @@ export default function Footer() {
                             style={{
                                 width: "26px",
                                 height: "26px",
+                                background: "var(--color-accent)",
                                 borderRadius: "6px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                overflow: "hidden",
                             }}
                         >
-                            <Image
-                                src="/logo-light-mode.png"
-                                alt="InvoiceMate Logo"
-                                width={26}
-                                height={26}
-                                className="block dark:hidden"
-                            />
-                            <Image
-                                src="/logo-dark-mode.png"
-                                alt="InvoiceMate Logo"
-                                width={26}
-                                height={26}
-                                className="hidden dark:block"
-                            />
+                            <FileText size={14} color="#fff" />
                         </div>
                         <span
                             style={{

@@ -8,12 +8,12 @@ import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard,
     Building2,
+    FileText,
     LogOut,
     PlusCircle,
     Menu,
     X,
 } from "lucide-react";
-import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
@@ -56,28 +56,15 @@ const SidebarContent = ({
                 style={{
                     width: "28px",
                     height: "28px",
+                    background: "var(--color-accent)",
                     borderRadius: "7px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    overflow: "hidden",
                 }}
             >
-                <Image
-                    src="/logo-light-mode.png"
-                    alt="InvoiceMate Logo"
-                    width={28}
-                    height={28}
-                    className="block dark:hidden"
-                />
-                <Image
-                    src="/logo-dark-mode.png"
-                    alt="InvoiceMate Logo"
-                    width={28}
-                    height={28}
-                    className="hidden dark:block"
-                />
+                <FileText size={14} color="#fff" />
             </div>
             <span
                 style={{
@@ -222,27 +209,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                             style={{
                                 width: "24px",
                                 height: "24px",
+                                background: "var(--color-accent)",
                                 borderRadius: "6px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                overflow: "hidden",
                             }}
                         >
-                            <Image
-                                src="/logo-light-mode.png"
-                                alt="InvoiceMate Logo"
-                                width={24}
-                                height={24}
-                                className="block dark:hidden"
-                            />
-                            <Image
-                                src="/logo-dark-mode.png"
-                                alt="InvoiceMate Logo"
-                                width={24}
-                                height={24}
-                                className="hidden dark:block"
-                            />
+                            <FileText size={12} color="#fff" />
                         </div>
                         <span style={{ fontWeight: 600, fontSize: "0.875rem", color: "var(--color-text)" }}>
                             InvoiceMate
