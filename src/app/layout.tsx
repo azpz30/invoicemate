@@ -32,12 +32,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="light" style={{ colorScheme: "light" }} suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
+          forcedTheme={undefined}
           disableTransitionOnChange
         >
           {children}

@@ -96,8 +96,14 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  color-scheme: light;
 }
 
+html.dark {
+  color-scheme: dark;
+}
+
+html,
 body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
