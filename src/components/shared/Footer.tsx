@@ -29,14 +29,27 @@ export default function Footer() {
                             style={{
                                 width: "26px",
                                 height: "26px",
-                                background: "var(--color-accent)",
                                 borderRadius: "6px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                overflow: "hidden",
                             }}
                         >
-                            <FileText size={14} color="#fff" />
+                            <img
+                                src="/logo-light-mode.png"
+                                alt="InvoiceMate Logo"
+                                width={26}
+                                height={26}
+                                className="block dark:hidden"
+                            />
+                            <img
+                                src="/logo-dark-mode.png"
+                                alt="InvoiceMate Logo"
+                                width={26}
+                                height={26}
+                                className="hidden dark:block"
+                            />
                         </div>
                         <span
                             style={{

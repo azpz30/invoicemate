@@ -53,14 +53,27 @@ export default function Navbar() {
                         style={{
                             width: "30px",
                             height: "30px",
-                            background: "var(--color-accent)",
                             borderRadius: "8px",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            overflow: "hidden",
                         }}
                     >
-                        <FileText size={16} color="#fff" />
+                        <img
+                            src="/logo-light-mode.png"
+                            alt="InvoiceMate Logo"
+                            width={30}
+                            height={30}
+                            className="block dark:hidden"
+                        />
+                        <img
+                            src="/logo-dark-mode.png"
+                            alt="InvoiceMate Logo"
+                            width={30}
+                            height={30}
+                            className="hidden dark:block"
+                        />
                     </div>
                     <span
                         style={{

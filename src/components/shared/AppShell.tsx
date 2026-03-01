@@ -56,15 +56,28 @@ const SidebarContent = ({
                 style={{
                     width: "28px",
                     height: "28px",
-                    background: "var(--color-accent)",
                     borderRadius: "7px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
+                    overflow: "hidden",
                 }}
             >
-                <FileText size={14} color="#fff" />
+                <img
+                    src="/logo-light-mode.png"
+                    alt="InvoiceMate Logo"
+                    width={28}
+                    height={28}
+                    className="block dark:hidden"
+                />
+                <img
+                    src="/logo-dark-mode.png"
+                    alt="InvoiceMate Logo"
+                    width={28}
+                    height={28}
+                    className="hidden dark:block"
+                />
             </div>
             <span
                 style={{
@@ -209,14 +222,27 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                             style={{
                                 width: "24px",
                                 height: "24px",
-                                background: "var(--color-accent)",
                                 borderRadius: "6px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                overflow: "hidden",
                             }}
                         >
-                            <FileText size={12} color="#fff" />
+                            <img
+                                src="/logo-light-mode.png"
+                                alt="InvoiceMate Logo"
+                                width={24}
+                                height={24}
+                                className="block dark:hidden"
+                            />
+                            <img
+                                src="/logo-dark-mode.png"
+                                alt="InvoiceMate Logo"
+                                width={24}
+                                height={24}
+                                className="hidden dark:block"
+                            />
                         </div>
                         <span style={{ fontWeight: 600, fontSize: "0.875rem", color: "var(--color-text)" }}>
                             InvoiceMate
