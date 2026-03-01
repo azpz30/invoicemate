@@ -55,13 +55,7 @@ export function DashboardStats({ totalInvoiced, invoicesSent, awaitingPayment }:
                     </div>
                 </div>
             ))}
-            <style jsx>{`
-                @media (max-width: 600px) {
-                    .stats-grid {
-                        grid-template-columns: 1fr !important;
-                    }
-                }
-            `}</style>
+
         </div>
     );
 }
