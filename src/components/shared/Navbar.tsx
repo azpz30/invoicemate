@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import Image from "next/image";
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -60,14 +61,14 @@ export default function Navbar() {
                             overflow: "hidden",
                         }}
                     >
-                        <img
+                        <Image
                             src="/logo-light-mode.png"
                             alt="InvoiceMate Logo"
                             width={30}
                             height={30}
                             className="block dark:hidden"
                         />
-                        <img
+                        <Image
                             src="/logo-dark-mode.png"
                             alt="InvoiceMate Logo"
                             width={30}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FileText } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -36,14 +36,14 @@ export default function Footer() {
                                 overflow: "hidden",
                             }}
                         >
-                            <img
+                            <Image
                                 src="/logo-light-mode.png"
                                 alt="InvoiceMate Logo"
                                 width={26}
                                 height={26}
                                 className="block dark:hidden"
                             />
-                            <img
+                            <Image
                                 src="/logo-dark-mode.png"
                                 alt="InvoiceMate Logo"
                                 width={26}

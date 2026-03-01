@@ -7,13 +7,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard,
-    FileText,
     Building2,
     LogOut,
     PlusCircle,
     Menu,
     X,
 } from "lucide-react";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
@@ -64,14 +64,14 @@ const SidebarContent = ({
                     overflow: "hidden",
                 }}
             >
-                <img
+                <Image
                     src="/logo-light-mode.png"
                     alt="InvoiceMate Logo"
                     width={28}
                     height={28}
                     className="block dark:hidden"
                 />
-                <img
+                <Image
                     src="/logo-dark-mode.png"
                     alt="InvoiceMate Logo"
                     width={28}
@@ -229,14 +229,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                                 overflow: "hidden",
                             }}
                         >
-                            <img
+                            <Image
                                 src="/logo-light-mode.png"
                                 alt="InvoiceMate Logo"
                                 width={24}
                                 height={24}
                                 className="block dark:hidden"
                             />
-                            <img
+                            <Image
                                 src="/logo-dark-mode.png"
                                 alt="InvoiceMate Logo"
                                 width={24}
