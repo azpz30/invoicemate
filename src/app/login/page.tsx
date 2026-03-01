@@ -34,7 +34,7 @@ export default function LoginPage() {
         const supabase = createClient();
         await supabase.auth.signInWithOAuth({
             provider: "google",
-            options: { redirectTo: `${window.location.origin}/dashboard` },
+            options: { redirectTo: `${window.location.origin}/auth/callback?next=/dashboard` },
         });
     };
 
@@ -42,7 +42,7 @@ export default function LoginPage() {
         const supabase = createClient();
         await supabase.auth.signInWithOAuth({
             provider: "apple",
-            options: { redirectTo: `${window.location.origin}/dashboard` },
+            options: { redirectTo: `${window.location.origin}/auth/callback?next=/dashboard` },
         });
     };
 

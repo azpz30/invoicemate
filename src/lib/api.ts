@@ -2,21 +2,17 @@ import { createClient } from "./supabase/client";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080/api";
 
-interface ApiOptions extends RequestInit {
-    // Add any custom options here
-}
-
 /**
  * fetchAPI is a wrapper around the native fetch API that automatically
  * injects the current user's Supabase JWT access token for authenticated
  * requests to the custom Go backend.
  */
-export async function fetchAPI(endpoint: string, options: ApiOptions = {}) {
+export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
     // Initialize the Supabase client
     const supabase = createClient();
 
     // Get the current session
-    const { data: { session }, error } = await supabase.auth.getSession();
+    const { data: { session } } = await supabase.auth.getSession();
 
     const headers = new Headers(options.headers || {});
     headers.set("Content-Type", "application/json");
@@ -54,7 +50,7 @@ export async function fetchAPI(endpoint: string, options: ApiOptions = {}) {
     // Try parsing the successful response as JSON
     try {
         return await response.json();
-    } catch (e) {
+    } catch {
         return null;
     }
 }
