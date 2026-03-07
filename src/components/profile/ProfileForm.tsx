@@ -7,6 +7,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { Business } from "@/types";
 import { LogoUpload } from "@/components/profile/LogoUpload";
+import { fetchAPI } from "@/lib/api";
 
 // Setup form validation schema
 const profileFormSchema = z.object({
@@ -15,7 +16,9 @@ const profileFormSchema = z.object({
     address: z.string().min(5, { message: "Please provide a valid business address." }),
     phone: z.string().optional(),
     email: z.string().email({ message: "Please enter a valid email address." }),
-    bank_details: z.string().optional(),
+    bank_bsb: z.string().optional(),
+    bank_account_number: z.string().optional(),
+    bank_account_name: z.string().optional(),
     logo_url: z.string().optional().nullable(),
 });
 
@@ -36,7 +39,9 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
             address: initialData?.address || "",
             phone: initialData?.phone || "",
             email: initialData?.email || "",
-            bank_details: initialData?.bank_details || "",
+            bank_bsb: initialData?.bank_bsb || "",
+            bank_account_number: initialData?.bank_account_number || "",
+            bank_account_name: initialData?.bank_account_name || "",
             logo_url: initialData?.logo_url || null,
         },
     });
@@ -44,17 +49,10 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
     async function onSubmit(data: ProfileFormValues) {
         setIsLoading(true);
         try {
-            const response = await fetch("/api/business", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+            await fetchAPI("business/profile", {
+                method: "PUT",
                 body: JSON.stringify(data),
             });
-
-            if (!response.ok) {
-                throw new Error("Failed to save profile");
-            }
 
             toast.success("Profile updated", {
                 description: "Your business details have been saved successfully.",
@@ -160,19 +158,38 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
 
                 {/* Payment Section */}
                 <div>
-                    <h3 style={{ margin: "0 0 16px 0", fontSize: "1.125rem" }}>Payment Information</h3>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                        <label className="label" htmlFor="bank_details">Bank Details (BSB & Account)</label>
-                        <textarea
-                            id="bank_details"
-                            className="input"
-                            style={{ minHeight: "80px", resize: "vertical" }}
-                            placeholder="BSB: 000-000\nAccount: 1234 5678\nName: Acme Pty Ltd"
-                            {...form.register("bank_details")}
-                        />
-                        <p style={{ fontSize: "0.8125rem", color: "var(--color-text-3)", margin: 0 }}>
-                            These details will appear at the bottom of your invoices.
-                        </p>
+                    <h3 style={{ margin: "0 0 4px 0", fontSize: "1.125rem" }}>Payment Information</h3>
+                    <p style={{ margin: "0 0 16px 0", fontSize: "0.8125rem", color: "var(--color-text-3)" }}>
+                        These details will appear at the bottom of your invoices.
+                    </p>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px", gridColumn: "1 / -1" }}>
+                            <label className="label" htmlFor="bank_account_name">Account Name</label>
+                            <input
+                                id="bank_account_name"
+                                className="input"
+                                placeholder="Acme Pty Ltd"
+                                {...form.register("bank_account_name")}
+                            />
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                            <label className="label" htmlFor="bank_bsb">BSB</label>
+                            <input
+                                id="bank_bsb"
+                                className="input"
+                                placeholder="626-900"
+                                {...form.register("bank_bsb")}
+                            />
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                            <label className="label" htmlFor="bank_account_number">Account Number</label>
+                            <input
+                                id="bank_account_number"
+                                className="input"
+                                placeholder="1234 5678"
+                                {...form.register("bank_account_number")}
+                            />
+                        </div>
                     </div>
                 </div>
 

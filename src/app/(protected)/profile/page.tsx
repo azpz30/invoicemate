@@ -4,22 +4,42 @@ import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
     const supabase = await createClient();
+
+    // getUser() re-validates with Supabase server and refreshes the session if needed.
+    // This is the recommended way to protect server components, and ensures the
+    // access_token we get from getSession() below is fresh.
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
         redirect("/login");
     }
 
-    // Fetch user's business profile from Supabase
-    const { data: businessData } = await supabase
-        .from("businesses")
-        .select("*")
-        .eq("user_id", user.id)
-        .single();
+    // After getUser() refreshes the session, getSession() returns a valid, fresh token
+    const { data: { session } } = await supabase.auth.getSession();
 
-    // If no row exists yet, this will be null.
-    // Make sure we pass null, not undefined, to match the Business | null type expect.
-    const initialData = businessData || null;
+    // Fetch user's business profile from the Go Backend using the session token
+    let initialData: import("@/types").Business | null = null;
+    if (session?.access_token) {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/business/profile`, {
+                headers: {
+                    "Authorization": `Bearer ${session.access_token}`
+                },
+                cache: 'no-store'
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.data) {
+                    initialData = result.data;
+                }
+            } else {
+                console.error("Failed to fetch profile from API", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching profile from API", error);
+        }
+    }
 
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>

@@ -2,11 +2,13 @@ export interface Business {
     id: string;
     user_id: string;
     name: string;
-    abn: string;
+    abn?: string;
     address: string;
-    phone: string;
+    phone?: string;
     email: string;
-    bank_details: string;
+    bank_bsb?: string;
+    bank_account_number?: string;
+    bank_account_name?: string;
     logo_url?: string;
     created_at: string;
 }
@@ -15,8 +17,8 @@ export interface Client {
     id: string;
     user_id: string;
     name: string;
-    address: string;
-    email: string;
+    address?: string;
+    email?: string;
     created_at: string;
 }
 
@@ -32,8 +34,10 @@ export interface InvoiceItem {
 export interface Invoice {
     id: string;
     user_id: string;
+    business_id: string;
     client_id: string;
     client?: Client;
+    client_name?: string;
     invoice_number: string;
     issue_date: string;
     due_date: string;
@@ -42,18 +46,24 @@ export interface Invoice {
     total: number;
     status: "draft" | "paid";
     notes?: string;
+    custom_message?: string;
     include_gst: boolean;
     items?: InvoiceItem[];
     created_at: string;
 }
 
 export interface InvoiceForm {
-    client_id: string;
-    new_client?: Partial<Client>;
-    invoice_number: string;
+    business_id: string;
+    client_id?: string;
+    new_client?: {
+        name: string;
+        address?: string;
+        email?: string;
+    };
     issue_date: string;
     due_date: string;
     notes: string;
+    custom_message: string;
     include_gst: boolean;
     items: Omit<InvoiceItem, "id" | "invoice_id">[];
 }
